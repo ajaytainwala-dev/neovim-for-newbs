@@ -1,18 +1,56 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-vim.g.mapleader = " "
-vim.g.background = "light"
+-- Indentation settings
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 
+-- Shell configuration for Windows
+if vim.fn.has("win32") == 1 then
+  vim.opt.shell = "powershell.exe"
+  vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+  vim.opt.shellquote = ""
+  vim.opt.shellxquote = ""
+end
+
+-- Display settings
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
+vim.opt.wrap = true
+
+-- File handling
 vim.opt.swapfile = false
+vim.opt.undofile = true
+vim.opt.backup = false
 
--- Navigate vim panes better
-vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
-vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
-vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
-vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
+-- Search settings
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = true
 
-vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
-vim.wo.number = true
+-- Appearance
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Window navigation
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true })
+
+-- Clear search highlighting
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true })
+
+-- Better indentation
+vim.keymap.set("v", "<", "<gv", { noremap = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true })
+
+-- Move lines
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { noremap = true })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { noremap = true })
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { noremap = true })
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { noremap = true })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true })
 
